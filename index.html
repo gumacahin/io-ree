@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="regular expression, regex, regexp, ruby, rails, programming, development, editor, tester, builder, tool">	
+<meta name="description" content="OIREE is an interactive online regular expressions editor. It is a handy tool for tasks involving regular expressions as the match results on your test string appear as you type your regexp." >
+<meta name="author" content="http://mvalviar.com">
+<title>OIREE: Online Interactive  Regular Expressions Editor</title>
+<link rel="stylesheet" type="text/css" href="assets/style.css">
+<link rel="shortcut icon" href="assets/favicon.ico">
+<script type="text/javascript" src="assets/mootools-core-1.4.4-full-compat-yc.js"></script>
+<script type="text/javascript" src="assets/mootools-more-1.4.0.1.js"></script>
+<script type="text/javascript" src="assets/Observer.js"></script>
+<script type="text/javascript" src="assets/ioree.js"></script>
+<!-- google analytics start -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29098575-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- google analytics ends -->
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=167040113410224";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  <div class="container">
+  <header>
+    <h1><a href="/" title="Online Interactive Regular Expressions Editor Home">OIREE</a>:
+    <span class="first">O</span>nline
+    <span class="first">I</span>nteractive
+    <span class="first">R</span>egular
+    <span class="first">E</span>xpressions
+    <span class="first">E</span>ditor</h1>
+    <div class="addthis_wrap">
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style ">
+    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    <a class="addthis_button_tweet"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f34275c1bdcb452"></script>
+    <!-- AddThis Button END -->
+    </div>
+
+  </header>
+  <div class="content">
+  <form class="main" method="get" action="/q">
+  <div class="row first">
+  <input id="re" name="re" type="text" placeholder="regular expression" autofocus>
+  <input id="flags" name="flags" type="text" placeholder="pattern modifiers">
+  </div>
+  <div class="row second">
+  <textarea id="string" name="string" placeholder="string"></textarea>
+  <output id="output" name="result">output, errors or messages</output>
+  </div>
+  <div class="row buttons">
+  <button id="bn_clear" onclick="return false" >Clear Fields</button>
+  <button id="bn_reset" onclick="return false" >Reset Reference</button>
+  <button id="bn_perma"onclick="return false">Make Permalink</button>
+  </div>
+  </form>
+
+  <div class="help">
+  you may drag these lists around &rarr;
+  </div>
+
+  <section class="ref_card">
+  <h2>Regular Expressions Quick Reference</h2>
+  <dl class="meta_chars">
+  <dt>Meta Characters</dt>
+  <dd><code>^</code> Start of subject (or line in multiline mode)</dd>
+  <dd><code>$</code> End of subject (or line in multiline mode)</dd>
+  <dd><code>[</code> Start character class definition</dd>
+  <dd><code>]</code> End character class definition</dd>
+  <dd><code>|</code> Alternates, eg (a|b) matches a or b</dd>
+  <dd><code>(</code> Start subpattern</dd>
+  <dd><code>)</code> End subpattern</dd>
+  <dd><code>\</code> Escape character</dd>
+  </dl>
+
+  <dl class="pattern_mods">
+  <dt>Pattern Modifiers</dt>
+  <dd><code>i</code> Caseless – ignore case</dd>
+  <dd><code>m</code> Multiline mode - ^ and $ match start and end of lines</dd>
+  <dd><code>s</code> Dotall - . class includes newline</dd>
+  <dd><code>x</code> Extended– comments & whitespace</dd>
+  <!--<dd><code>e</code> preg_replace only – enables evaluation of replacement as PHP code</dd>-->
+  <dd><code>S</code> Extra analysis of pattern</dd>
+  <dd><code>U</code> Pattern is ungreedy</dd>
+  <dd><code>u</code> Pattern is treated as UTF-8</dd>
+  </dl>
+
+  <dl class="char_cls last">
+  <dt>Base Character Classes</dt>
+  <dd><code>\w</code>   Any “word” character (a-z 0-9 _)</dd>
+  <dd><code>\W</code>   Any non “word” character</dd>
+  <dd><code>\s</code>   Whitespace (space, tab CRLF)</dd>
+  <dd><code>\S</code>   Any non whitepsace character</dd>
+  <dd><code>\d</code>   Digits (0-9)</dd>
+  <dd><code>\D</code>   Any non digit character</dd>
+  <dd><code>. </code>   (Period) – Any character except newline</dd>
+  </dl>
+
+  <dl class="pba">
+  <dt> Point Based Assertions</dt>
+  <dd><code>\b</code>    Word boundary</dd>
+  <dd><code>\B</code>    Not a word boundary</dd>
+  <dd><code>\A</code>    Start of subject</dd>
+  <dd><code>\Z</code>    End of subject or newline at end</dd>
+  <dd><code>\z</code>    End of subject</dd>
+  <dd><code>\G</code>    First matching position in subject</dd>
+  </dl>
+
+
+  <dl class="quantifiers">
+  <dt>Quantifiers</dt>
+  <dd><code>n*   </code> Zero or more of n</dd>
+  <dd><code>n+   </code> One or more of n</dd>
+  <dd><code>n?   </code> Zero or one occurrences of n</dd>
+  <dd><code>{n}  </code> n occurrences exactly</dd>
+  <dd><code>{n,} </code> At least n occurrences</dd>
+  <dd><code>{,m} </code>At most m occurrences</dd>
+  <dd><code>{n,m}</code> Between n and m occurrences (inclusive)</dd>
+  </dl>
+  </section>
+
+  <section class="fb_comments">
+  <h2>Feedback</h2>
+  <p>Please let me know what you think. You may leave a comment below or email me at 
+    mval<a href="http://www.google.com/recaptcha/mailhide/d?k=01ruHVbSuY-Qgte0nsyUt3ew==&amp;c=QP3_lm8i8rSlPq_aAqxT2gmL35PMbevHojfu-2KnA7c=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501ruHVbSuY-Qgte0nsyUt3ew\75\75\46c\75QP3_lm8i8rSlPq_aAqxT2gmL35PMbevHojfu-2KnA7c\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">...</a>@gmail.com
+  </p>
+  <div class="fb-comments" data-href="http://io-ree.appspot.com" data-num-posts="20" data-width="960"></div>
+  </section>
+
+  </div>
+
+
+  <footer>
+  &copy; 2012 <a href="http://mvalviar.com" target="_blank">Marco Enrico Alviar</a>.
+<!--<img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif"
+alt="Powered by Google App Engine" />-->
+  </footer>
+  </div>
+</body>
+</html>

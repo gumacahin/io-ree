@@ -1,0 +1,36 @@
+{% if messages %}
+<div class="message">
+<p class="error">
+{{messages}}
+</p>
+</div>
+{% else %}{% if not matches %}
+<div class="message">
+<p class="notice">
+No match.
+</p>
+{% else %}
+{% if hasMatches %}
+<div class="result">
+  <div class="matches">
+  <h3 class="m">Matches</h3>
+  {{string}}
+  </div>
+  {% if hasGroups %}
+  <div class="match_groups">
+  <h3 class="gm">Group Matches</h3>
+  {% for m in matches %}
+    {% if m.groups %}
+    <ol style="background: #{% cycle fff,ccc %}; color:#{% cycle 4978ef,f04acc,f0c14a,4af06e' %}">
+      {% for g in m.groups %}
+      <li>{{g}}</li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+  {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endif %}{% endif %}
+

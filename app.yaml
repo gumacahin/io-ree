@@ -1,0 +1,11 @@
+runtime: python27
+api_version: 1
+threadsafe: false
+handlers:
+- url: /q
+  script: main.py
+- url: /assets
+  static_dir: assets
+- url: .*
+  script: main.py
+
